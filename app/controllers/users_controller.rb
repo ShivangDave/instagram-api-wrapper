@@ -1,18 +1,29 @@
 class UsersController < ApplicationController
 
+  def welcome
+    render :json => { "msg" => "Welcome to this app" }, :status => :ok
+  end
+
   def auth
-    puts params
-    render :json => { "msg" => "this is auth" }, :status => :ok
+    render :json => { "msg" => "you're not supposed to be here!" }, :status => :ok
   end
 
   def deauth
-    puts params
-    render :json => { "msg" => "this is deauth" }, :status => :ok
+    render :json => { "msg" => "you're not supposed to be here either!" }, :status => :ok
+  end
+
+  def refresh
+    res = refreshToken
+    if res
+      render :json => { "token" => res["token"] }
+    else
+      render :json => { "token" => "failed" }
+    end
   end
 
   def pictures
-    puts params
-    render :json => { "msg" => "this is pictures" }, :status => :ok
+    pictures = getImages
+    render :json => pictures.to_json, :status => :ok
   end
 
 end
