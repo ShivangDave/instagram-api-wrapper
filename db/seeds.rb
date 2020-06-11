@@ -1,1 +1,1 @@
-seedUser = User.new(username: 'Shivang')
+seedUser = User.create(username: 'Shivang')
