@@ -4,13 +4,15 @@ class ApplicationController < ActionController::API
     secret = request.headers['Auth']
     newToken = nil
 
+    byebug
+
     if secret != ENV['SECRET']
+      newToken
+    else
       res = RestClient.get("https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=#{ENV['token']}")
       newToken = JSON.parse(res)
-    else
-      newToken
     end
-    
+
     newToken
   end
 
