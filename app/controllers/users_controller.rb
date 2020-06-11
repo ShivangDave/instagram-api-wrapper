@@ -14,8 +14,9 @@ class UsersController < ApplicationController
 
   def refresh
     res = refreshToken
+    
     if res
-      render :json => { "token" => res["token"] }
+      render :json => { "token" => res }
     else
       render :json => { "token" => "failed" }
     end
