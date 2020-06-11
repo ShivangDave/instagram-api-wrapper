@@ -4,8 +4,6 @@ class ApplicationController < ActionController::API
     secret = request.headers['Auth']
     newToken = nil
 
-    byebug
-
     if secret != ENV['SECRET']
       newToken
     else
