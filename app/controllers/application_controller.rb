@@ -15,13 +15,17 @@ class ApplicationController < ActionController::API
   end
 
   def getImages
+
+    query = 'caption,media_url,permalink'
+
     getPosts.map do |post|
       id = post["id"]
-      media = RestClient.get("https://graph.instagram.com/#{id}?fields=caption,media_url&access_token=#{ENV['token']}")
+      media = RestClient.get("https://graph.instagram.com/#{id}?fields=#{query}&access_token=#{ENV['token']}")
       imageHash = JSON.parse(media)
       {
         url: imageHash["media_url"],
-        caption: imageHash["caption"]
+        caption: imageHash["caption"],
+        permalink: imageHash["permalink"]
       }
     end
   end
